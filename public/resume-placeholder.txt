@@ -1,0 +1,2 @@
+Replace this file with your resume PDF named resume.pdf
+so the "Resume" link in the nav works.
