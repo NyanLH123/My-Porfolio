@@ -19,16 +19,13 @@ export function About() {
 
         <ScrollReveal delay={0.2}>
           <p className="text-slate-600 text-lg leading-relaxed mb-6">
-            I am a full-stack web developer focused on PHP and MERN stack, skilled in React, Tailwind CSS, MySQL,
-            and API integration. I also have project management experience coordinating teams and delivering
-            projects successfully. I enjoy solving problems and building practical, interactive web solutions.
+            I am a full-stack web developer experienced in PHP and Node.js for backend development and React with Tailwind CSS for frontend, with skills in MySQL, API integration, and responsive web application design. I enjoy building practical, interactive systems and focusing on clean, maintainable solutions.
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.3}>
           <p className="text-slate-600 text-lg leading-relaxed mb-10">
-            I bring a solution-oriented mindset, strong team collaboration, and clear communication to every
-            project—along with fundamentals in leadership and project management.
+            Alongside development, I have experience in project coordination, teamwork, and problem-solving through educational and social development initiatives. I am currently expanding my skills toward AI and machine learning, while strengthening my foundation in software engineering and project management.
           </p>
         </ScrollReveal>
 
