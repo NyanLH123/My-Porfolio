@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me - Nyan Linn Htet</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* About Page Specific Styles */
+    .roadmap-container {
+      position: relative;
+      padding: var(--spacing-2xl) 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .roadmap-item {
+      position: relative;
+      margin-bottom: var(--spacing-3xl);
+      padding-left: var(--spacing-3xl);
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .roadmap-item:nth-child(1) { animation-delay: 0.1s; }
+    .roadmap-item:nth-child(2) { animation-delay: 0.2s; }
+    .roadmap-item:nth-child(3) { animation-delay: 0.3s; }
+    .roadmap-item:nth-child(4) { animation-delay: 0.4s; }
+    .roadmap-item:nth-child(5) { animation-delay: 0.5s; }
+    .roadmap-item:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .roadmap-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 20px;
+      height: 20px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      border: 4px solid var(--primary-bg);
+      box-shadow: 0 0 0 3px var(--accent-color);
+      z-index: 2;
+    }
+
+    .roadmap-item::after {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 40px;
+      width: 2px;
+      height: calc(100% + var(--spacing-2xl));
+      background: linear-gradient(to bottom, var(--accent-color), transparent);
+      z-index: 1;
+    }
+
+    .roadmap-item:last-child::after {
+      display: none;
+    }
+
+    .roadmap-content {
+      background-color: var(--primary-bg);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      transition: all var(--transition-normal);
+    }
+
+    .roadmap-content:hover {
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .roadmap-year {
+      color: var(--accent-color);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .roadmap-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-primary);
+    }
+
+    .roadmap-description {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Certificate Styles */
+    .certificate-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-2xl);
+    }
+
+    .certificate-item {
+      cursor: pointer;
+      transition: all var(--transition-normal);
+    }
+
+    .certificate-preview {
+      position: relative;
+      width: 100%;
+      padding-bottom: 141%;
+      background-color: var(--secondary-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: all var(--transition-normal);
+    }
+
+    .certificate-preview img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+
+    .certificate-item:hover .certificate-preview {
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-large);
+      transform: translateY(-4px);
+    }
+
+    .certificate-item:hover .certificate-preview img {
+      transform: scale(1.05);
+    }
+
+    .certificate-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 113, 227, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .certificate-item:hover .certificate-overlay {
+      opacity: 1;
+    }
+
+    .certificate-overlay-content {
+      text-align: center;
+      color: white;
+    }
+
+    .certificate-overlay-icon {
+      font-size: 32px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .certificate-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: var(--spacing-md);
+      color: var(--text-primary);
+    }
+
+    .certificate-issuer {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: var(--spacing-sm);
+    }
+
+    /* Album Styles */
+    .album-container {
+      background: linear-gradient(135deg, rgba(0, 113, 227, 0.05) 0%, rgba(0, 113, 227, 0.02) 100%);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-2xl);
+      margin-top: var(--spacing-2xl);
+    }
+
+    .album-chapters {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .album-chapter {
+      background-color: var(--primary-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      cursor: pointer;
+      transition: all var(--transition-normal);
+    }
+
+    .album-chapter:hover {
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-medium);
+      transform: translateY(-4px);
+    }
+
+    .chapter-number {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background-color: var(--secondary-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .chapter-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-primary);
+    }
+
+    .chapter-description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-md);
+      line-height: 1.6;
+    }
+
+    .chapter-photos {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .chapter-photo {
+      width: 40px;
+      height: 40px;
+      background-color: var(--secondary-bg);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .chapter-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .album-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-2xl);
+    }
+
+    .album-photo {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      background-color: var(--secondary-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      transition: all var(--transition-normal);
+    }
+
+    .album-photo img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+
+    .album-photo:hover {
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .album-photo:hover img {
+      transform: scale(1.1);
+    }
+
+    .album-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 113, 227, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+      z-index: 2;
+    }
+
+    .album-photo:hover .album-overlay {
+      opacity: 1;
+    }
+
+    .album-overlay-icon {
+      font-size: 24px;
+      color: white;
+    }
+
+    /* Social Links Section */
+    .social-section {
+      text-align: center;
+      padding: var(--spacing-2xl) 0;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-lg);
+      flex-wrap: wrap;
+      margin: var(--spacing-lg) 0;
+    }
+
+    .social-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-md);
+      text-decoration: none;
+      transition: all var(--transition-normal);
+    }
+
+    .social-icon-circle {
+      width: 60px;
+      height: 60px;
+      background-color: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .social-icon:hover .social-icon-circle {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      color: white;
+      transform: translateY(-4px);
+    }
+
+    .social-icon-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* Modal for album viewing */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 3000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .lightbox-img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      font-size: 32px;
+      color: white;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      transition: background var(--transition-fast);
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .lightbox-prev {
+      left: var(--spacing-lg);
+    }
+
+    .lightbox-next {
+      right: var(--spacing-lg);
+    }
+
+    @media (max-width: 768px) {
+      .certificate-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .album-chapters {
+        grid-template-columns: 1fr;
+      }
+
+      .album-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .social-icons {
+        gap: var(--spacing-md);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .certificate-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .album-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-item {
+        padding-left: var(--spacing-xl);
+      }
+
+      .roadmap-item::before {
+        left: -8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-terminal"></i>
+        Nyan Linn Htet
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html" class="active">About Me</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="section section-gray" style="padding-top: var(--spacing-3xl); padding-bottom: var(--spacing-3xl);">
+    <div class="container">
+      <h1 style="margin-bottom: var(--spacing-md);">
+        <i class="fas fa-user-circle" style="color: var(--accent-color);"></i> About Me
+      </h1>
+      <p style="font-size: 16px; color: var(--text-secondary); max-width: 700px;">
+        My personal journey, values, and the experiences that shape who I am today. Discover the stories behind my professional and personal growth.
+      </p>
+    </div>
+  </section>
+
+  <!-- My Story - Roadmap Section -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="section-title">
+        <h2>My Journey</h2>
+        <p>Scroll through the milestones that have shaped my path</p>
+      </div>
+
+      <div class="roadmap-container">
+        <!-- 2016 - Early Interest -->
+        <div class="roadmap-item">
+          <div class="roadmap-content">
+            <div class="roadmap-year">2016 - Age 10</div>
+            <div class="roadmap-title">First Computer Experience</div>
+            <div class="roadmap-description">
+              Got my first computer and became fascinated with how technology works. Started exploring basic programming and digital tools, 
+              sparking a lifelong passion for technology and innovation.
+            </div>
+          </div>
+        </div>
+
+        <!-- 2019 - High School -->
+        <div class="roadmap-item">
+          <div class="roadmap-content">
+            <div class="roadmap-year">2019</div>
+            <div class="roadmap-title">High School Studies</div>
+            <div class="roadmap-description">
+              Pursued science stream with focus on mathematics and physics. Started learning programming languages independently and 
+              participated in academic competitions. Developed leadership skills through student council.
+            </div>
+          </div>
+        </div>
+
+        <!-- 2021 - University & Volunteering -->
+        <div class="roadmap-item">
+          <div class="roadmap-content">
+            <div class="roadmap-year">2021</div>
+            <div class="roadmap-title">University & Community Service</div>
+            <div class="roadmap-description">
+              Enrolled in Bachelor of Computing program. Simultaneously started volunteering with For The Future – Myanmar, discovering 
+              my passion for social impact and community development alongside technical learning.
+            </div>
+          </div>
+        </div>
+
+        <!-- 2022 - Professional Growth -->
+        <div class="roadmap-item">
+          <div class="roadmap-content">
+            <div class="roadmap-year">2022</div>
+            <div class="roadmap-title">Professional Development</div>
+            <div class="roadmap-description">
+              Became Programme Development Officer at ASEAN Youth Organization. Completed multiple online certifications in web development 
+              and machine learning. Started freelancing and contributing to open-source projects.
+            </div>
+          </div>
+        </div>
+
+        <!-- 2023 - Advanced Learning -->
+        <div class="roadmap-item">
+          <div class="roadmap-content">
+            <div class="roadmap-year">2023</div>
+            <div class="roadmap-title">Specialization & Impact</div>
+            <div class="roadmap-description">
+              Deepened expertise in AI/ML through advanced courses and projects. Coordinated major community projects reaching 500+ beneficiaries. 
+              Promoted to senior roles in volunteer organizations while maintaining academic excellence.
+            </div>
+          </div>
+        </div>
+
+        <!-- 2024 - Present & Future -->
+        <div class="roadmap-item">
+          <div class="roadmap-content">
+            <div class="roadmap-year">2024 - Present</div>
+            <div class="roadmap-title">Building Impact at Scale</div>
+            <div class="roadmap-description">
+              Working as Junior Web Developer at tech company while continuing volunteer leadership. Building innovative projects that 
+              bridge technology and social impact. Preparing for transition into AI/ML roles and entrepreneurship.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values & Beliefs -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>My Values</h2>
+        <p>Core principles that guide my decisions and actions</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div style="font-size: 40px; color: var(--accent-color); margin-bottom: var(--spacing-lg);">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h4 style="margin-bottom: var(--spacing-md);">Community Impact</h4>
+          <p class="card-description">
+            I believe in using my skills and knowledge to create positive change in communities and help others reach their potential.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 40px; color: var(--accent-color); margin-bottom: var(--spacing-lg);">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h4 style="margin-bottom: var(--spacing-md);">Continuous Learning</h4>
+          <p class="card-description">
+            Technology evolves rapidly, and I'm committed to staying updated, learning new skills, and adapting to change.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 40px; color: var(--accent-color); margin-bottom: var(--spacing-lg);">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h4 style="margin-bottom: var(--spacing-md);">Collaboration</h4>
+          <p class="card-description">
+            I thrive in diverse teams and believe that diverse perspectives lead to better solutions and stronger outcomes.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 40px; color: var(--accent-color); margin-bottom: var(--spacing-lg);">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h4 style="margin-bottom: var(--spacing-md);">Integrity</h4>
+          <p class="card-description">
+            I value honesty, transparency, and ethical practices in all my professional and personal endeavors.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 40px; color: var(--accent-color); margin-bottom: var(--spacing-lg);">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h4 style="margin-bottom: var(--spacing-md);">Innovation</h4>
+          <p class="card-description">
+            I'm passionate about finding creative solutions to complex problems and pushing boundaries.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 40px; color: var(--accent-color); margin-bottom: var(--spacing-lg);">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <h4 style="margin-bottom: var(--spacing-md);">Work-Life Balance</h4>
+          <p class="card-description">
+            I believe in maintaining a healthy balance between career ambitions and personal well-being.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates Section -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="section-title">
+        <h2>Certificates & Achievements</h2>
+        <p>Professional certifications and recognitions I've earned</p>
+      </div>
+
+      <div class="certificate-gallery">
+        <!-- Certificate 1 -->
+        <div class="certificate-item" onclick="openCertificateModal(this)">
+          <div class="certificate-preview">
+            <img src="https://via.placeholder.com/400x564/e8f0ff/0071e3?text=AWS+Certificate" alt="AWS Certification">
+            <div class="certificate-overlay">
+              <div class="certificate-overlay-content">
+                <div class="certificate-overlay-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <p>View Certificate</p>
+              </div>
+            </div>
+          </div>
+          <div class="certificate-name">AWS Certified Cloud Practitioner</div>
+          <div class="certificate-issuer">Amazon Web Services (2024)</div>
+        </div>
+
+        <!-- Certificate 2 -->
+        <div class="certificate-item" onclick="openCertificateModal(this)">
+          <div class="certificate-preview">
+            <img src="https://via.placeholder.com/400x564/ffe8e8/ff3b30?text=Google+Cloud" alt="Google Cloud Certificate">
+            <div class="certificate-overlay">
+              <div class="certificate-overlay-content">
+                <div class="certificate-overlay-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <p>View Certificate</p>
+              </div>
+            </div>
+          </div>
+          <div class="certificate-name">Google Cloud Skills Boost</div>
+          <div class="certificate-issuer">Google Cloud (2024)</div>
+        </div>
+
+        <!-- Certificate 3 -->
+        <div class="certificate-item" onclick="openCertificateModal(this)">
+          <div class="certificate-preview">
+            <img src="https://via.placeholder.com/400x564/e8ffe8/34c759?text=ML+Specialization" alt="ML Certificate">
+            <div class="certificate-overlay">
+              <div class="certificate-overlay-content">
+                <div class="certificate-overlay-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <p>View Certificate</p>
+              </div>
+            </div>
+          </div>
+          <div class="certificate-name">Machine Learning Specialization</div>
+          <div class="certificate-issuer">Coursera (2023)</div>
+        </div>
+
+        <!-- Certificate 4 -->
+        <div class="certificate-item" onclick="openCertificateModal(this)">
+          <div class="certificate-preview">
+            <img src="https://via.placeholder.com/400x564/fff8e8/ff9500?text=Web+Development" alt="Web Dev Certificate">
+            <div class="certificate-overlay">
+              <div class="certificate-overlay-content">
+                <div class="certificate-overlay-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <p>View Certificate</p>
+              </div>
+            </div>
+          </div>
+          <div class="certificate-name">Full Stack Web Development Bootcamp</div>
+          <div class="certificate-issuer">Udemy (2023)</div>
+        </div>
+
+        <!-- Certificate 5 -->
+        <div class="certificate-item" onclick="openCertificateModal(this)">
+          <div class="certificate-preview">
+            <img src="https://via.placeholder.com/400x564/e8f0ff/5856d6?text=Leadership" alt="Leadership Certificate">
+            <div class="certificate-overlay">
+              <div class="certificate-overlay-content">
+                <div class="certificate-overlay-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <p>View Certificate</p>
+              </div>
+            </div>
+          </div>
+          <div class="certificate-name">Leadership Development Program</div>
+          <div class="certificate-issuer">ASEAN Youth Organization (2023)</div>
+        </div>
+
+        <!-- Certificate 6 -->
+        <div class="certificate-item" onclick="openCertificateModal(this)">
+          <div class="certificate-preview">
+            <img src="https://via.placeholder.com/400x564/f0e8ff/a29bfe?text=Data+Science" alt="Data Science Certificate">
+            <div class="certificate-overlay">
+              <div class="certificate-overlay-content">
+                <div class="certificate-overlay-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <p>View Certificate</p>
+              </div>
+            </div>
+          </div>
+          <div class="certificate-name">Data Science with Python</div>
+          <div class="certificate-issuer">DataCamp (2023)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Digital Album Section -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>My Life Album</h2>
+        <p>A visual journey through my experiences, growth, and memorable moments</p>
+      </div>
+
+      <div class="album-container">
+        <!-- Album Chapters -->
+        <h3 style="margin-bottom: var(--spacing-lg);">Album Chapters</h3>
+        <div class="album-chapters">
+          <!-- Chapter 1 -->
+          <div class="album-chapter">
+            <div class="chapter-number">01</div>
+            <div class="chapter-title">Early Days</div>
+            <div class="chapter-description">
+              My childhood, first computer experience, and early inspiration from technology. These moments shaped my curiosity about how things work.
+            </div>
+            <div class="chapter-photos">
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/e8f0ff/0071e3" alt="Photo">
+              </div>
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/e8f0ff/0071e3" alt="Photo">
+              </div>
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/e8f0ff/0071e3" alt="Photo">
+              </div>
+              <span style="font-size: 12px; color: var(--text-light); margin-top: auto;">+2 more</span>
+            </div>
+          </div>
+
+          <!-- Chapter 2 -->
+          <div class="album-chapter">
+            <div class="chapter-number">02</div>
+            <div class="chapter-title">High School Adventures</div>
+            <div class="chapter-description">
+              Academic achievements, competitions, and leadership roles. Building confidence and discovering my passion for making a difference.
+            </div>
+            <div class="chapter-photos">
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/ffe8e8/ff3b30" alt="Photo">
+              </div>
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/ffe8e8/ff3b30" alt="Photo">
+              </div>
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/ffe8e8/ff3b30" alt="Photo">
+              </div>
+              <span style="font-size: 12px; color: var(--text-light); margin-top: auto;">+4 more</span>
+            </div>
+          </div>
+
+          <!-- Chapter 3 -->
+          <div class="album-chapter">
+            <div class="chapter-number">03</div>
+            <div class="chapter-title">University Life</div>
+            <div class="chapter-description">
+              Campus memories, late-night coding sessions, group projects, and the beginning of my volunteer journey. A transformative period.
+            </div>
+            <div class="chapter-photos">
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/e8ffe8/34c759" alt="Photo">
+              </div>
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/e8ffe8/34c759" alt="Photo">
+              </div>
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/e8ffe8/34c759" alt="Photo">
+              </div>
+              <span style="font-size: 12px; color: var(--text-light); margin-top: auto;">+5 more</span>
+            </div>
+          </div>
+
+          <!-- Chapter 4 -->
+          <div class="album-chapter">
+            <div class="chapter-number">04</div>
+            <div class="chapter-title">Community Impact</div>
+            <div class="chapter-description">
+              Volunteer work, community projects, mentoring youth, and seeing the direct impact of my efforts. Moments of purpose and fulfillment.
+            </div>
+            <div class="chapter-photos">
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/fff8e8/ff9500" alt="Photo">
+              </div>
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/fff8e8/ff9500" alt="Photo">
+              </div>
+              <div class="chapter-photo">
+                <img src="https://via.placeholder.com/40/fff8e8/ff9500" alt="Photo">
+              </div>
+              <span style="font-size: 12px; color: var(--text-light); margin-top: auto;">+6 more</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div style="margin-top: var(--spacing-2xl);">
+          <h3 style="margin-bottom: var(--spacing-lg);">Photo Memories</h3>
+          <div class="album-gallery">
+            <div class="album-photo">
+              <img src="https://via.placeholder.com/300/e8f0ff/0071e3?text=Moment+1" alt="Memory">
+              <div class="album-overlay">
+                <div class="album-overlay-icon">
+                  <i class="fas fa-expand"></i>
+                </div>
+              </div>
+            </div>
+            <div class="album-photo">
+              <img src="https://via.placeholder.com/300/ffe8e8/ff3b30?text=Moment+2" alt="Memory">
+              <div class="album-overlay">
+                <div class="album-overlay-icon">
+                  <i class="fas fa-expand"></i>
+                </div>
+              </div>
+            </div>
+            <div class="album-photo">
+              <img src="https://via.placeholder.com/300/e8ffe8/34c759?text=Moment+3" alt="Memory">
+              <div class="album-overlay">
+                <div class="album-overlay-icon">
+                  <i class="fas fa-expand"></i>
+                </div>
+              </div>
+            </div>
+            <div class="album-photo">
+              <img src="https://via.placeholder.com/300/fff8e8/ff9500?text=Moment+4" alt="Memory">
+              <div class="album-overlay">
+                <div class="album-overlay-icon">
+                  <i class="fas fa-expand"></i>
+                </div>
+              </div>
+            </div>
+            <div class="album-photo">
+              <img src="https://via.placeholder.com/300/e8f0ff/5856d6?text=Moment+5" alt="Memory">
+              <div class="album-overlay">
+                <div class="album-overlay-icon">
+                  <i class="fas fa-expand"></i>
+                </div>
+              </div>
+            </div>
+            <div class="album-photo">
+              <img src="https://via.placeholder.com/300/f0e8ff/a29bfe?text=Moment+6" alt="Memory">
+              <div class="album-overlay">
+                <div class="album-overlay-icon">
+                  <i class="fas fa-expand"></i>
+                </div>
+              </div>
+            </div>
+            <div class="album-photo">
+              <img src="https://via.placeholder.com/300/e8f0ff/0071e3?text=Moment+7" alt="Memory">
+              <div class="album-overlay">
+                <div class="album-overlay-icon">
+                  <i class="fas fa-expand"></i>
+                </div>
+              </div>
+            </div>
+            <div class="album-photo">
+              <img src="https://via.placeholder.com/300/ffe8e8/ff3b30?text=Moment+8" alt="Memory">
+              <div class="album-overlay">
+                <div class="album-overlay-icon">
+                  <i class="fas fa-expand"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media & Contact -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="social-section">
+        <div class="section-title">
+          <h2>Connect With Me</h2>
+          <p>Follow my journey on social media and stay updated</p>
+        </div>
+
+        <div class="social-icons">
+          <a href="https://linkedin.com/in/nyan-linn-htet" target="_blank" class="social-icon">
+            <div class="social-icon-circle">
+              <i class="fab fa-linkedin"></i>
+            </div>
+            <div class="social-icon-name">LinkedIn</div>
+          </a>
+
+          <a href="https://github.com/nyanlinnhtet" target="_blank" class="social-icon">
+            <div class="social-icon-circle">
+              <i class="fab fa-github"></i>
+            </div>
+            <div class="social-icon-name">GitHub</div>
+          </a>
+
+          <a href="https://twitter.com/nyanlinnhtet" target="_blank" class="social-icon">
+            <div class="social-icon-circle">
+              <i class="fab fa-twitter"></i>
+            </div>
+            <div class="social-icon-name">Twitter</div>
+          </a>
+
+          <a href="https://instagram.com/nyanlinnhtet" target="_blank" class="social-icon">
+            <div class="social-icon-circle">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <div class="social-icon-name">Instagram</div>
+          </a>
+
+          <a href="https://facebook.com/nyanlinnhtet" target="_blank" class="social-icon">
+            <div class="social-icon-circle">
+              <i class="fab fa-facebook"></i>
+            </div>
+            <div class="social-icon-name">Facebook</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="about.html">Certificates</a></li>
+          <li><a href="#">Blog (Coming Soon)</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:your.email@example.com">Email</a></li>
+          <li><a href="tel:+95123456789">Phone</a></li>
+          <li><a href="#">Location: Myanmar</a></li>
+          <li><a href="#">Available for: Work</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <p>&copy; 2024 Nyan Linn Htet. All rights reserved.</p>
+      </div>
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Album photo expansion
+    document.querySelectorAll('.album-photo').forEach(photo => {
+      photo.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        openLightbox(img.src);
+      });
+    });
+
+    function openLightbox(src) {
+      const lightbox = document.createElement('div');
+      lightbox.className = 'lightbox active';
+      lightbox.innerHTML = `
+        <div class="lightbox-content">
+          <button class="lightbox-close" onclick="this.closest('.lightbox').remove()">×</button>
+          <img src="${src}" class="lightbox-img" alt="Full size image">
+        </div>
+      `;
+      document.body.appendChild(lightbox);
+
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.remove();
+        }
+      });
+    }
+
+    function openCertificateModal(element) {
+      const img = element.querySelector('img');
+      const name = element.querySelector('.certificate-name').textContent;
+      openLightbox(img.src);
+    }
+  </script>
+</body>
+</html>

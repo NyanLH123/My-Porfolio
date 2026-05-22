@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Education - Nyan Linn Htet</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Additional Education Page Styles */
+      .education-timeline {
+        position: relative;
+        padding: var(--spacing-2xl) 0;
+      }
+
+      .timeline-item {
+        margin-bottom: var(--spacing-2xl);
+        padding-left: var(--spacing-3xl);
+        position: relative;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 16px;
+        height: 16px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        border: 3px solid var(--primary-bg);
+        box-shadow: 0 0 0 3px var(--accent-color);
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 40px;
+        width: 2px;
+        height: calc(100% + var(--spacing-2xl));
+        background-color: var(--border-color);
+      }
+
+      .timeline-item:last-child::after {
+        display: none;
+      }
+
+      .timeline-item h3 {
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+      }
+
+      .timeline-item .institution {
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .timeline-item .duration {
+        color: var(--text-light);
+        font-size: 14px;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .timeline-item .description {
+        color: var(--text-secondary);
+        line-height: 1.8;
+      }
+
+      .course-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-lg);
+      }
+
+      .course-item {
+        background-color: var(--secondary-bg);
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+        border-left: 4px solid var(--accent-color);
+      }
+
+      .course-item h5 {
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+      }
+
+      .course-item p {
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+
+      .skill-badge {
+        display: inline-block;
+        background-color: var(--secondary-bg);
+        color: var(--text-primary);
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius-lg);
+        font-size: 14px;
+        margin-right: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+        border: 1px solid var(--border-color);
+        transition: all var(--transition-fast);
+      }
+
+      .skill-badge:hover {
+        background-color: var(--accent-color);
+        color: white;
+        border-color: var(--accent-color);
+      }
+
+      .achievement-card {
+        background: linear-gradient(
+          135deg,
+          rgba(0, 113, 227, 0.05) 0%,
+          rgba(0, 113, 227, 0.02) 100%
+        );
+        border: 1px solid var(--border-color);
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-lg);
+        text-align: center;
+        transition: all var(--transition-normal);
+      }
+
+      .achievement-card:hover {
+        box-shadow: var(--shadow-medium);
+        transform: translateY(-4px);
+      }
+
+      .achievement-icon {
+        font-size: 32px;
+        color: var(--accent-color);
+        margin-bottom: var(--spacing-md);
+      }
+
+      .achievement-card h4 {
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .achievement-card p {
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+
+      .document-card {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--spacing-lg);
+      }
+
+      .document-icon {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        background-color: var(--secondary-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 20px;
+      }
+
+      .document-card h4 {
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .document-card p {
+        font-size: 14px;
+        margin-bottom: var(--spacing-md);
+      }
+
+      @media (max-width: 768px) {
+        .course-list {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline-item {
+          padding-left: var(--spacing-2xl);
+        }
+
+        .timeline-item::before {
+          width: 12px;
+          height: 12px;
+          left: 2px;
+        }
+
+        .timeline-item::after {
+          left: 5px;
+        }
+
+        .document-card {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <i class="fas fa-terminal"></i>
+          Nyan Linn Htet
+        </div>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="education.html" class="active">Education</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="section section-gray"
+      style="
+        padding-top: var(--spacing-3xl);
+        padding-bottom: var(--spacing-3xl);
+      "
+    >
+      <div class="container">
+        <h1 style="margin-bottom: var(--spacing-md)">
+          <i
+            class="fas fa-graduation-cap"
+            style="color: var(--accent-color)"
+          ></i>
+          My Education
+        </h1>
+        <p
+          style="
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 700px;
+          "
+        >
+          Explore my academic journey, qualifications, and the skills I've
+          acquired through formal education and continuous learning.
+        </p>
+        <div
+          style="
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-lg);
+          "
+        >
+          <a href="#academic-documents" class="btn btn-primary">
+            <i class="fas fa-file-pdf"></i> Academic Documents
+          </a>
+          <a href="#certifications" class="btn btn-secondary">
+            <i class="fas fa-certificate"></i> View Certifications
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Academic Background -->
+    <section class="section section-light">
+      <div class="container">
+        <div class="section-title">
+          <h2>Academic Background</h2>
+          <p>My educational journey and qualifications</p>
+        </div>
+
+        <div class="education-timeline">
+          <!-- Bachelor of Computing -->
+          <div class="timeline-item">
+            <div class="institution">University of Greenwich / KMD College</div>
+            <h3>Bachelor of Computing</h3>
+            <div class="duration">
+              <i class="fas fa-calendar-alt"></i> 2024 - 2027 (Expected)
+            </div>
+            <div class="description">
+              Currently pursuing a Bachelor’s degree in Computer Science at the
+              University of Greenwich, with a focus on emerging technologies
+              including AI and Machine Learning. Maintaining strong academic
+              performance while developing practical skills in software
+              development, systems thinking, and problem-solving.
+            </div>
+            <div class="course-list">
+              <!-- <div class="course-item">
+              <h5>Data Structures & Algorithms</h5>
+              <p>Grade: A</p>
+            </div>
+            <div class="course-item">
+              <h5>Web Development</h5>
+              <p>Grade: A</p>
+            </div>
+            <div class="course-item">
+              <h5>Database Management</h5>
+              <p>Grade: A-</p>
+            </div>
+            <div class="course-item">
+              <h5>Machine Learning Fundamentals</h5>
+              <p>Grade: A</p>
+            </div> -->
+            </div>
+          </div>
+
+          <!-- High School -->
+          <div class="timeline-item">
+            <div class="institution">High School / Secondary Education</div>
+            <h3>General Educational Development (GED) Diploma</h3>
+            <div class="duration">
+              <i class="fas fa-calendar-alt"></i> 2018 - 2021
+            </div>
+            <div class="description">
+              Completed General Educational Development (GED) with a focus on
+              science and technology subjects. Actively engaged in
+              extracurricular activities that built foundational skills in
+              computing, teamwork, and community involvement, shaping a strong
+              interest in computer science and community development.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Academic Documents -->
+    <section id="academic-documents" class="section section-gray">
+      <div class="container">
+        <div class="section-title">
+          <h2>Academic Documents</h2>
+          <p>
+            Downloadable spaces for marks, transcripts, and diploma documents
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card document-card">
+            <div class="document-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div>
+              <h4>GED Diploma Certificate</h4>
+              <p>
+                See more details about the GED Diploma Certificate, including the subjects covered, grades achieved, and how it has contributed to my foundational knowledge in various academic areas.
+              </p>
+              <a href="/downloads/GED Diploma Certificate.pdf" download class="btn btn-primary">
+                <i class="fas fa-download"></i> Download Marks PDF
+              </a>
+            </div>
+          </div>
+
+          <div class="card document-card">
+            <div class="document-icon">
+              <i class="fas fa-scroll"></i>
+            </div>
+            <div>
+              <h4>NCC Level 4 Diploma in Computing</h4>
+              <p>
+                See more details about the NCC Level 4 Diploma in Computing, including the curriculum, learning outcomes, and how it has contributed to my
+                knowledge and skills in the field of computing.
+              </p>
+              <a
+                href="/downloads/NCC Level 4 Diploma in Computing.pdf"
+                download
+                class="btn btn-primary"
+              >
+                <i class="fas fa-download"></i> Download Diploma PDF
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--spacing-xl)">
+          <a href="#certifications" class="btn btn-secondary">
+            <i class="fas fa-arrow-down"></i> Go to Certifications
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Achievements -->
+    <!-- <section class="section section-light">
+    <div class="container">
+      <div class="section-title">
+        <h2>Key Achievements</h2>
+        <p>Recognition and accomplishments throughout my educational journey</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="achievement-card">
+          <div class="achievement-icon">
+            <i class="fas fa-medal"></i>
+          </div>
+          <h4>Dean's List</h4>
+          <p>Recognized for academic excellence and outstanding performance in multiple semesters.</p>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon">
+            <i class="fas fa-award"></i>
+          </div>
+          <h4>Scholarship Recipient</h4>
+          <p>Awarded merit-based scholarship for academic achievement and leadership potential.</p>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <h4>Hackathon Winner</h4>
+          <p>Won 1st place in university hackathon with an innovative mobile application project.</p>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h4>Class Representative</h4>
+          <p>Selected as class representative for demonstrating leadership and communication skills.</p>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <h4>Research Publication</h4>
+          <p>Co-authored research paper on AI applications published in academic journal.</p>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h4>Programming Excellence</h4>
+          <p>Recognized for proficiency in multiple programming languages and software development practices.</p>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+    <!-- Skills & Competencies -->
+    <section class="section section-gray">
+      <div class="container">
+        <div class="section-title">
+          <h2>Skills & Competencies</h2>
+          <p>Technical and professional skills developed through education</p>
+        </div>
+
+        <div style="max-width: 900px; margin: 0 auto">
+          <div style="margin-bottom: var(--spacing-xl)">
+            <h4 style="margin-bottom: var(--spacing-md)">
+              Programming Languages
+            </h4>
+            <div>
+              <span class="skill-badge"
+                ><i class="fas fa-code"></i> Python</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-code"></i> JavaScript</span
+              >
+              <span class="skill-badge"><i class="fas fa-code"></i> C++</span>
+              <span class="skill-badge"><i class="fas fa-code"></i> PHP</span>
+              <span class="skill-badge"><i class="fas fa-code"></i> SQL</span>
+              <span class="skill-badge"
+                ><i class="fas fa-code"></i> HTML/CSS</span
+              >
+            </div>
+          </div>
+
+          <div style="margin-bottom: var(--spacing-xl)">
+            <h4 style="margin-bottom: var(--spacing-md)">Web Technologies</h4>
+            <div>
+              <span class="skill-badge"
+                ><i class="fas fa-globe"></i> React</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-globe"></i> Node.js</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-globe"></i> Bootstrap</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-globe"></i> REST APIs</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-globe"></i> MongoDB</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-globe"></i> Express.js</span
+              >
+            </div>
+          </div>
+
+          <!-- <div style="margin-bottom: var(--spacing-xl)">
+            <h4 style="margin-bottom: var(--spacing-md)">
+              AI & Machine Learning
+            </h4>
+            <div>
+              <span class="skill-badge"
+                ><i class="fas fa-brain"></i> TensorFlow</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-brain"></i> Scikit-learn</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-brain"></i> Data Analysis</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-brain"></i> Neural Networks</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-brain"></i> Pandas</span
+              >
+            </div>
+          </div> -->
+
+          <div>
+            <h4 style="margin-bottom: var(--spacing-md)">Soft Skills</h4>
+            <div>
+              <span class="skill-badge"
+                ><i class="fas fa-handshake"></i> Team Collaboration</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-handshake"></i> Problem Solving</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-handshake"></i> Communication</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-handshake"></i> Leadership</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-handshake"></i> Project Management</span
+              >
+              <span class="skill-badge"
+                ><i class="fas fa-handshake"></i> Critical Thinking</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" class="section section-light">
+      <div class="container">
+        <div class="section-title">
+          <h2>Certifications & Courses</h2>
+          <p>Professional certifications and online courses completed</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div
+              style="
+                padding: var(--spacing-lg);
+                background-color: var(--secondary-bg);
+                border-radius: var(--radius-md);
+                margin-bottom: var(--spacing-lg);
+                text-align: center;
+              "
+            >
+              <i
+                class="fas fa-certificate"
+                style="font-size: 40px; color: var(--accent-color)"
+              ></i>
+            </div>
+            <h4 style="margin-bottom: var(--spacing-sm)">
+              Google Cloud Skills Boost
+            </h4>
+            <p
+              style="
+                font-size: 14px;
+                margin-bottom: var(--spacing-md);
+                color: var(--text-light);
+              "
+            >
+              2024
+            </p>
+            <p class="card-description">
+              Completed foundational course on Google Cloud Platform with
+              hands-on labs and practical projects.
+            </p>
+          </div>
+
+          <div class="card">
+            <div
+              style="
+                padding: var(--spacing-lg);
+                background-color: var(--secondary-bg);
+                border-radius: var(--radius-md);
+                margin-bottom: var(--spacing-lg);
+                text-align: center;
+              "
+            >
+              <i
+                class="fas fa-certificate"
+                style="font-size: 40px; color: var(--accent-color)"
+              ></i>
+            </div>
+            <h4 style="margin-bottom: var(--spacing-sm)">
+              AWS Certified Cloud Practitioner
+            </h4>
+            <p
+              style="
+                font-size: 14px;
+                margin-bottom: var(--spacing-md);
+                color: var(--text-light);
+              "
+            >
+              2024
+            </p>
+            <p class="card-description">
+              AWS certification demonstrating knowledge of cloud concepts,
+              services, and best practices.
+            </p>
+          </div>
+
+          <div class="card">
+            <div
+              style="
+                padding: var(--spacing-lg);
+                background-color: var(--secondary-bg);
+                border-radius: var(--radius-md);
+                margin-bottom: var(--spacing-lg);
+                text-align: center;
+              "
+            >
+              <i
+                class="fas fa-certificate"
+                style="font-size: 40px; color: var(--accent-color)"
+              ></i>
+            </div>
+            <h4 style="margin-bottom: var(--spacing-sm)">
+              Machine Learning Specialization
+            </h4>
+            <p
+              style="
+                font-size: 14px;
+                margin-bottom: var(--spacing-md);
+                color: var(--text-light);
+              "
+            >
+              2023
+            </p>
+            <p class="card-description">
+              Comprehensive specialization covering ML algorithms, deep
+              learning, and practical applications.
+            </p>
+          </div>
+
+          <div class="card">
+            <div
+              style="
+                padding: var(--spacing-lg);
+                background-color: var(--secondary-bg);
+                border-radius: var(--radius-md);
+                margin-bottom: var(--spacing-lg);
+                text-align: center;
+              "
+            >
+              <i
+                class="fas fa-certificate"
+                style="font-size: 40px; color: var(--accent-color)"
+              ></i>
+            </div>
+            <h4 style="margin-bottom: var(--spacing-sm)">
+              Full Stack Web Development
+            </h4>
+            <p
+              style="
+                font-size: 14px;
+                margin-bottom: var(--spacing-md);
+                color: var(--text-light);
+              "
+            >
+              2023
+            </p>
+            <p class="card-description">
+              Bootcamp certification covering frontend, backend, databases, and
+              deployment technologies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section section-light">
+      <div class="container text-center">
+        <h2 style="margin-bottom: var(--spacing-lg)">
+          Interested in My Background?
+        </h2>
+        <p
+          style="
+            font-size: 16px;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-secondary);
+          "
+        >
+          Check out my experience and projects to see my education in action.
+        </p>
+        <div
+          style="
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+          "
+        >
+          <a href="experience.html" class="btn btn-primary btn-lg">
+            <i class="fas fa-briefcase"></i> View Experience
+          </a>
+          <a href="projects.html" class="btn btn-secondary btn-lg">
+            <i class="fas fa-project-diagram"></i> See Projects
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="about.html">Certificates</a></li>
+            <li><a href="#">Blog (Coming Soon)</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Social</h4>
+          <ul>
+            <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com" target="_blank">GitHub</a></li>
+            <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+            <li>
+              <a href="https://instagram.com" target="_blank">Instagram</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:your.email@example.com">Email</a></li>
+            <li><a href="tel:+95123456789">Phone</a></li>
+            <li><a href="#">Location: Myanmar</a></li>
+            <li><a href="#">Available for: Work</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          <p>&copy; 2024 Nyan Linn Htet. All rights reserved.</p>
+        </div>
+        <div class="social-links">
+          <a href="https://linkedin.com" target="_blank" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://github.com" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" title="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

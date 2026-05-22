@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details - Nyan Linn Htet</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Project Detail Page Styles */
+    .project-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(0, 113, 227, 0.1) 0%, rgba(0, 113, 227, 0.05) 100%);
+      padding: var(--spacing-3xl) 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .project-hero-content {
+      max-width: 900px;
+      width: 100%;
+      padding: 0 var(--page-gutter);
+    }
+
+    .project-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-2xl);
+      align-items: start;
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .project-header-text h1 {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .project-header-text p {
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .project-meta {
+      display: flex;
+      gap: var(--spacing-lg);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background-color: var(--primary-bg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .meta-item strong {
+      color: var(--text-primary);
+    }
+
+    .project-buttons {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .project-image-container {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: var(--secondary-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .project-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Project Details Content */
+    .project-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-section {
+      padding: var(--spacing-2xl) 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .project-section:last-child {
+      border-bottom: none;
+    }
+
+    .project-section h2 {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .section-text {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .section-text p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .section-text ul {
+      list-style: none;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .section-text ul li {
+      padding-left: var(--spacing-lg);
+      position: relative;
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-secondary);
+    }
+
+    .section-text ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+    }
+
+    .tech-item {
+      background-color: var(--secondary-bg);
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .gallery-item {
+      position: relative;
+      width: 100%;
+      padding-bottom: 66.67%;
+      background-color: var(--secondary-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+    }
+
+    .gallery-item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .challenges-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .challenge-card {
+      background-color: var(--secondary-bg);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--accent-color);
+    }
+
+    .challenge-card h4 {
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-primary);
+    }
+
+    .challenge-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .outcome-item {
+      text-align: center;
+      background-color: var(--secondary-bg);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+
+    .outcome-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .outcome-label {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .lesson-item {
+      background-color: var(--primary-bg);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+
+    .lesson-item h4 {
+      margin-bottom: var(--spacing-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .lesson-item h4 i {
+      color: var(--accent-color);
+    }
+
+    .lesson-item p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .related-projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .related-card {
+      background-color: var(--primary-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-normal);
+      cursor: pointer;
+    }
+
+    .related-card:hover {
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-medium);
+      transform: translateY(-4px);
+    }
+
+    .related-card-image {
+      width: 100%;
+      height: 150px;
+      background-color: var(--secondary-bg);
+      overflow: hidden;
+    }
+
+    .related-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .related-card-content {
+      padding: var(--spacing-lg);
+    }
+
+    .related-card h4 {
+      margin-bottom: var(--spacing-sm);
+      font-size: 16px;
+    }
+
+    .related-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .breadcrumb {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+      font-size: 14px;
+    }
+
+    .breadcrumb a {
+      color: var(--accent-color);
+    }
+
+    .breadcrumb span {
+      color: var(--text-light);
+    }
+
+    @media (max-width: 768px) {
+      .project-header {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .challenges-grid,
+      .lessons-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .outcomes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .related-projects {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-buttons {
+        flex-direction: column;
+      }
+
+      .project-buttons .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .project-hero {
+        min-height: auto;
+        padding: var(--spacing-2xl) 0;
+      }
+
+      .gallery-grid,
+      .outcomes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .related-projects {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-terminal"></i>
+        Nyan Linn Htet
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div style="padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border-color); background-color: var(--secondary-bg);">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="projects.html">Projects</a>
+        <span>/</span>
+        <span id="projectTitle">Project Details</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Hero Section -->
+  <section class="project-hero">
+    <div class="project-hero-content">
+      <div class="project-header">
+        <div class="project-header-text">
+          <h1 id="projectName">E-Commerce Platform</h1>
+          <p id="projectShortDesc">
+            A full-stack e-commerce solution with product management, shopping cart, and payment integration.
+          </p>
+          <div class="project-meta">
+            <div class="meta-item">
+              <i class="fas fa-calendar"></i>
+              <strong>Completed:</strong> <span id="projectDate">2024</span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-tag"></i>
+              <strong>Category:</strong> <span id="projectCategory">Web Development</span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-clock"></i>
+              <strong>Duration:</strong> <span id="projectDuration">3 months</span>
+            </div>
+          </div>
+          <div class="project-buttons">
+            <a href="#" id="liveDemoBtn" class="btn btn-primary">
+              <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="#" id="githubBtn" class="btn btn-secondary">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-image-container">
+          <img id="projectImage" src="https://via.placeholder.com/400x200/e8f0ff/0071e3?text=E-Commerce+Platform" alt="Project">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Content -->
+  <section class="section section-light">
+    <div class="project-content container">
+      <!-- Project Overview -->
+      <div class="project-section">
+        <h2>Project Overview</h2>
+        <div class="section-text">
+          <p id="projectOverview">
+            This e-commerce platform is a comprehensive solution designed to help small to medium-sized businesses establish 
+            an online presence and sell products effectively. The platform combines a modern, user-friendly interface with 
+            powerful backend functionality to handle complex business operations.
+          </p>
+        </div>
+      </div>
+
+      <!-- What is the Project -->
+      <div class="project-section">
+        <h2>What is This Project?</h2>
+        <div class="section-text">
+          <p id="whatIsProject">
+            The E-Commerce Platform is a full-stack web application that enables merchants to:
+          </p>
+          <ul id="whatIsList">
+            <li>Create and manage product catalogs with detailed descriptions and images</li>
+            <li>Process customer orders with integrated payment gateway (Stripe)</li>
+            <li>Track inventory and manage stock levels</li>
+            <li>Generate sales reports and analytics</li>
+            <li>Handle customer accounts and order history</li>
+          </ul>
+        </div>
+        
+        <h3 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md);">Key Features:</h3>
+        <div class="section-text">
+          <ul id="featuresList">
+            <li>Responsive design for mobile, tablet, and desktop</li>
+            <li>Secure user authentication and authorization</li>
+            <li>Shopping cart with real-time price updates</li>
+            <li>Order tracking and notification system</li>
+            <li>Admin dashboard for business analytics</li>
+            <li>Search and filtering capabilities</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Why the Project -->
+      <div class="project-section">
+        <h2>Why This Project?</h2>
+        <div class="section-text">
+          <p id="whyProject">
+            I chose this project because e-commerce is a rapidly growing sector where technology plays a crucial role. 
+            This project allowed me to:
+          </p>
+          <ul id="whyList">
+            <li>Gain practical experience with payment integration systems</li>
+            <li>Work with complex database design and optimization</li>
+            <li>Learn about security best practices in financial transactions</li>
+            <li>Understand user experience considerations in commerce</li>
+            <li>Build scalable architecture for handling multiple concurrent users</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- How Developed -->
+      <div class="project-section">
+        <h2>How Was It Developed?</h2>
+        
+        <h3 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md);">Technologies Used:</h3>
+        <div class="tech-stack" id="techStack">
+          <div class="tech-item">React</div>
+          <div class="tech-item">Node.js</div>
+          <div class="tech-item">MongoDB</div>
+          <div class="tech-item">Stripe API</div>
+          <div class="tech-item">AWS</div>
+          <div class="tech-item">Docker</div>
+        </div>
+
+        <h3 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md);">Development Process:</h3>
+        <div class="section-text">
+          <p>The project was developed following Agile methodology with 2-week sprints:</p>
+          <ul id="developmentProcess">
+            <li><strong>Phase 1 (Week 1-2):</strong> Requirement gathering and system design with wireframes</li>
+            <li><strong>Phase 2 (Week 3-6):</strong> Frontend development with React components and responsive design</li>
+            <li><strong>Phase 3 (Week 7-9):</strong> Backend API development with Express and database schema design</li>
+            <li><strong>Phase 4 (Week 10-11):</strong> Payment integration and security implementation</li>
+            <li><strong>Phase 5 (Week 12):</strong> Testing, bug fixes, and deployment</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Challenges & Solutions -->
+      <div class="project-section">
+        <h2>Challenges & Solutions</h2>
+        <div class="challenges-grid" id="challengesGrid">
+          <div class="challenge-card">
+            <h4><i class="fas fa-lock"></i> Payment Security</h4>
+            <p>Ensuring secure handling of sensitive payment information while maintaining PCI compliance.</p>
+          </div>
+          <div class="challenge-card">
+            <h4><i class="fas fa-bolt"></i> Performance Optimization</h4>
+            <p>Optimizing database queries and implementing caching to handle high traffic and concurrent users.</p>
+          </div>
+          <div class="challenge-card">
+            <h4><i class="fas fa-mobile-alt"></i> Mobile Responsiveness</h4>
+            <p>Creating a seamless shopping experience across all devices while maintaining design consistency.</p>
+          </div>
+          <div class="challenge-card">
+            <h4><i class="fas fa-chart-line"></i> Scalability</h4>
+            <p>Building an architecture that could scale to handle growing user base and transaction volume.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outcomes & Impact -->
+      <div class="project-section">
+        <h2>Outcomes & Impact</h2>
+        <div class="outcomes-grid" id="outcomesGrid">
+          <div class="outcome-item">
+            <div class="outcome-number">50K+</div>
+            <div class="outcome-label">Monthly Transactions</div>
+          </div>
+          <div class="outcome-item">
+            <div class="outcome-number">98%</div>
+            <div class="outcome-label">Uptime</div>
+          </div>
+          <div class="outcome-item">
+            <div class="outcome-number">1.2s</div>
+            <div class="outcome-label">Avg Page Load Time</div>
+          </div>
+        </div>
+
+        <div class="section-text" style="margin-top: var(--spacing-lg);">
+          <p>The platform successfully launched and has been serving businesses. Key achievements:</p>
+          <ul id="outcomesText">
+            <li>Generated $500K+ in GMV (Gross Merchandise Value) in first year</li>
+            <li>Maintained 98% platform uptime with zero security breaches</li>
+            <li>Improved checkout conversion rate by 35% through UX optimization</li>
+            <li>Reduced payment processing time from 5s to 1.2s</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Lessons Learned -->
+      <div class="project-section">
+        <h2>Lessons Learned</h2>
+        <div class="lessons-grid" id="lessonsGrid">
+          <div class="lesson-item">
+            <h4><i class="fas fa-lightbulb"></i> Security First</h4>
+            <p>Security should never be an afterthought. Implement it from the start of development.</p>
+          </div>
+          <div class="lesson-item">
+            <h4><i class="fas fa-users"></i> User Testing</h4>
+            <p>Regular user testing and feedback is invaluable for UX improvements.</p>
+          </div>
+          <div class="lesson-item">
+            <h4><i class="fas fa-code"></i> Code Quality</h4>
+            <p>Writing clean, well-documented code saves time during maintenance and scaling.</p>
+          </div>
+          <div class="lesson-item">
+            <h4><i class="fas fa-chart-line"></i> Monitoring</h4>
+            <p>Implementing proper monitoring and logging is critical for production systems.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery -->
+      <div class="project-section">
+        <h2>Project Gallery</h2>
+        <div class="gallery-grid" id="galleryGrid">
+          <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300/e8f0ff/0071e3?text=Dashboard" alt="Dashboard">
+          </div>
+          <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300/ffe8e8/ff3b30?text=Products+Page" alt="Products">
+          </div>
+          <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300/e8ffe8/34c759?text=Checkout" alt="Checkout">
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Projects -->
+      <div class="project-section">
+        <h2>Related Projects</h2>
+        <div class="related-projects" id="relatedProjects">
+          <a href="project-detail.html?id=2" class="related-card">
+            <div class="related-card-image">
+              <img src="https://via.placeholder.com/400x200/ffe8e8/ff3b30?text=Sentiment+Analysis" alt="Project">
+            </div>
+            <div class="related-card-content">
+              <h4>Sentiment Analysis Tool</h4>
+              <p>Machine learning for social media analysis</p>
+            </div>
+          </a>
+
+          <a href="project-detail.html?id=3" class="related-card">
+            <div class="related-card-image">
+              <img src="https://via.placeholder.com/400x200/e8ffe8/34c759?text=Task+Manager" alt="Project">
+            </div>
+            <div class="related-card-content">
+              <h4>Task Management App</h4>
+              <p>Collaborative task tracking platform</p>
+            </div>
+          </a>
+
+          <a href="project-detail.html?id=5" class="related-card">
+            <div class="related-card-image">
+              <img src="https://via.placeholder.com/400x200/e8e8ff/5856d6?text=Skill+Sharing" alt="Project">
+            </div>
+            <div class="related-card-content">
+              <h4>Skill Sharing Platform</h4>
+              <p>Community peer-to-peer learning</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section-gray">
+    <div class="container text-center">
+      <h2 style="margin-bottom: var(--spacing-lg);">Interested in This Project?</h2>
+      <p style="font-size: 16px; margin-bottom: var(--spacing-lg); color: var(--text-secondary);">
+        Check out the live demo or source code, and feel free to reach out if you'd like to discuss it further.
+      </p>
+      <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+        <a href="#liveDemoBtn" class="btn btn-primary btn-lg">
+          <i class="fas fa-external-link-alt"></i> View Live Demo
+        </a>
+        <a href="contact.html" class="btn btn-secondary btn-lg">
+          <i class="fas fa-envelope"></i> Get In Touch
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="about.html">Certificates</a></li>
+          <li><a href="#">Blog (Coming Soon)</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:your.email@example.com">Email</a></li>
+          <li><a href="tel:+95123456789">Phone</a></li>
+          <li><a href="#">Location: Myanmar</a></li>
+          <li><a href="#">Available for: Work</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <p>&copy; 2024 Nyan Linn Htet. All rights reserved.</p>
+      </div>
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Project Data
+    const projectsData = {
+      1: {
+        name: 'E-Commerce Platform',
+        shortDesc: 'A full-stack e-commerce solution with product management, shopping cart, and payment integration.',
+        category: 'Web Development',
+        date: '2024',
+        duration: '3 months',
+        image: 'https://via.placeholder.com/400x200/e8f0ff/0071e3?text=E-Commerce+Platform',
+        liveUrl: 'https://example-ecommerce.com',
+        githubUrl: 'https://github.com/nyanlinnhtet/ecommerce-platform',
+        overview: 'This e-commerce platform is a comprehensive solution designed to help small to medium-sized businesses establish an online presence and sell products effectively.',
+        whatIsProject: 'The E-Commerce Platform is a full-stack web application that enables merchants to create and manage product catalogs with detailed descriptions and images.',
+        whyProject: 'I chose this project because e-commerce is a rapidly growing sector where technology plays a crucial role.'
+      },
+      2: {
+        name: 'Sentiment Analysis Tool',
+        shortDesc: 'Machine learning application for analyzing sentiment in social media posts with real-time predictions.',
+        category: 'AI/Machine Learning',
+        date: '2023',
+        duration: '2 months',
+        image: 'https://via.placeholder.com/400x200/ffe8e8/ff3b30?text=Sentiment+Analysis',
+        liveUrl: 'https://example-sentiment.com',
+        githubUrl: 'https://github.com/nyanlinnhtet/sentiment-analysis'
+      },
+      3: {
+        name: 'Task Management App',
+        shortDesc: 'Collaborative task management tool with real-time updates, team collaboration, and progress tracking.',
+        category: 'Web Development',
+        date: '2023',
+        duration: '2.5 months',
+        image: 'https://via.placeholder.com/400x200/e8ffe8/34c759?text=Task+Manager',
+        liveUrl: 'https://example-taskapp.com',
+        githubUrl: 'https://github.com/nyanlinnhtet/task-manager'
+      },
+      4: {
+        name: 'Weather Forecast App',
+        shortDesc: 'Cross-platform mobile app providing real-time weather updates with beautiful UI and offline support.',
+        category: 'Mobile Apps',
+        date: '2023',
+        duration: '6 weeks',
+        image: 'https://via.placeholder.com/400x200/fff8e8/ff9500?text=Weather+App',
+        liveUrl: '#',
+        githubUrl: 'https://github.com/nyanlinnhtet/weather-app'
+      },
+      5: {
+        name: 'Skill Sharing Platform',
+        shortDesc: 'Community platform connecting volunteers and learners for peer-to-peer skill sharing and mentorship.',
+        category: 'Community Projects',
+        date: '2022',
+        duration: '4 months',
+        image: 'https://via.placeholder.com/400x200/e8e8ff/5856d6?text=Skill+Sharing',
+        liveUrl: 'https://example-skillshare.com',
+        githubUrl: 'https://github.com/nyanlinnhtet/skill-sharing'
+      },
+      6: {
+        name: 'Predictive Analytics Dashboard',
+        shortDesc: 'Data analytics platform using machine learning to provide actionable business insights and forecasting.',
+        category: 'AI/Machine Learning',
+        date: '2022',
+        duration: '3 months',
+        image: 'https://via.placeholder.com/400x200/f0e8ff/a29bfe?text=Analytics',
+        liveUrl: 'https://example-analytics.com',
+        githubUrl: 'https://github.com/nyanlinnhtet/predictive-analytics'
+      }
+    };
+
+    // Get project ID from URL
+    function getProjectId() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id') || '1';
+    }
+
+    // Load project details
+    function loadProjectDetails() {
+      const projectId = getProjectId();
+      const project = projectsData[projectId] || projectsData[1];
+
+      // Update page title
+      document.title = `${project.name} - Nyan Linn Htet`;
+      document.getElementById('projectTitle').textContent = project.name;
+
+      // Update hero section
+      document.getElementById('projectName').textContent = project.name;
+      document.getElementById('projectShortDesc').textContent = project.shortDesc;
+      document.getElementById('projectDate').textContent = project.date;
+      document.getElementById('projectCategory').textContent = project.category;
+      document.getElementById('projectDuration').textContent = project.duration;
+      document.getElementById('projectImage').src = project.image;
+
+      // Update buttons
+      const liveDemoBtn = document.getElementById('liveDemoBtn');
+      const githubBtn = document.getElementById('githubBtn');
+      
+      if (project.liveUrl && project.liveUrl !== '#') {
+        liveDemoBtn.href = project.liveUrl;
+        liveDemoBtn.target = '_blank';
+      } else {
+        liveDemoBtn.style.display = 'none';
+      }
+      
+      if (project.githubUrl) {
+        githubBtn.href = project.githubUrl;
+        githubBtn.target = '_blank';
+      }
+
+      // Update overview
+      if (project.overview) {
+        document.getElementById('projectOverview').textContent = project.overview;
+      }
+
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+
+    // Initialize
+    loadProjectDetails();
+  </script>
+</body>
+</html>

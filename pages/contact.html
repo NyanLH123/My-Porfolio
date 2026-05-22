@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Me - Nyan Linn Htet</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+  <style>
+    /* Contact Page Specific Styles */
+    .contact-hero {
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+    }
+
+    .contact-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-3xl);
+      align-items: start;
+    }
+
+    .contact-info {
+      background-color: var(--secondary-bg);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+
+    .contact-info h3 {
+      margin-bottom: var(--spacing-lg);
+      color: var(--text-primary);
+    }
+
+    .contact-item {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .contact-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .contact-item-content h4 {
+      margin-bottom: var(--spacing-sm);
+      font-size: 16px;
+    }
+
+    .contact-item-content p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .contact-item-content a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-item-content a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-form {
+      background-color: var(--primary-bg);
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: var(--spacing-sm);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: var(--spacing-md);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text-primary);
+      transition: all var(--transition-fast);
+      background-color: var(--primary-bg);
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: inherit;
+    }
+
+    .form-group.two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .form-group.two-col .form-group {
+      margin-bottom: 0;
+    }
+
+    .form-input.error,
+    .form-textarea.error,
+    .form-select.error {
+      border-color: #ff3b30;
+      background-color: rgba(255, 59, 48, 0.05);
+    }
+
+    .error-message {
+      color: #ff3b30;
+      font-size: 12px;
+      margin-top: var(--spacing-xs);
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: var(--spacing-md);
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: var(--radius-lg);
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .submit-btn:hover {
+      background-color: var(--accent-hover);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .success-message {
+      background-color: #34c759;
+      color: white;
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-lg);
+      display: none;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .success-message.show {
+      display: flex;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--accent-color);
+    }
+
+    .checkbox-item label {
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .availability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-md);
+    }
+
+    .availability-card {
+      background-color: var(--secondary-bg);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      border: 2px solid var(--border-color);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-align: center;
+    }
+
+    .availability-card:hover {
+      border-color: var(--accent-color);
+      background-color: var(--primary-bg);
+    }
+
+    .availability-card input[type="radio"] {
+      display: none;
+    }
+
+    .availability-card input[type="radio"]:checked + label {
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .availability-card input[type="radio"]:checked + label::before {
+      content: '✓';
+      display: inline-block;
+      margin-right: var(--spacing-sm);
+      color: var(--accent-color);
+    }
+
+    .availability-card label {
+      cursor: pointer;
+      display: block;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .faq-section {
+      margin-top: var(--spacing-3xl);
+    }
+
+    .faq-item {
+      background-color: var(--primary-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .faq-item:hover {
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-light);
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0;
+    }
+
+    .faq-toggle {
+      font-size: 20px;
+      color: var(--accent-color);
+      transition: transform var(--transition-fast);
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      color: var(--text-secondary);
+      margin-top: var(--spacing-md);
+      display: none;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .availability-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-info {
+        order: 2;
+      }
+
+      .contact-form {
+        order: 1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .availability-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-terminal"></i>
+        Nyan Linn Htet
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <button class="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="section section-gray" style="padding-top: var(--spacing-3xl); padding-bottom: var(--spacing-3xl);">
+    <div class="container">
+      <h1 style="margin-bottom: var(--spacing-md);">
+        <i class="fas fa-envelope" style="color: var(--accent-color);"></i> Get In Touch
+      </h1>
+      <p style="font-size: 16px; color: var(--text-secondary); max-width: 700px;">
+        I'm always interested in hearing about new opportunities, collaborations, or just having a friendly chat. Feel free to reach out!
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="contact-container">
+        <!-- Contact Information -->
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-item-content">
+              <h4>Email</h4>
+              <p><a href="mailto:nyan.linn.htet@example.com">nyan.linn.htet@example.com</a></p>
+              <p style="font-size: 12px; margin-top: var(--spacing-xs); color: var(--text-light);">Typically reply within 24 hours</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="contact-item-content">
+              <h4>Phone</h4>
+              <p><a href="tel:+95912345678">+95 9 123 456 789</a></p>
+              <p style="font-size: 12px; margin-top: var(--spacing-xs); color: var(--text-light);">Mon-Fri, 9AM-6PM (GMT+6:30)</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-item-content">
+              <h4>Location</h4>
+              <p>Yangon, Myanmar</p>
+              <p style="font-size: 12px; margin-top: var(--spacing-xs); color: var(--text-light);">Happy to meet for coffee or online calls</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div class="contact-item-content">
+              <h4>LinkedIn</h4>
+              <p><a href="https://linkedin.com/in/nyan-linn-htet" target="_blank">linkedin.com/in/nyan-linn-htet</a></p>
+              <p style="font-size: 12px; margin-top: var(--spacing-xs); color: var(--text-light);">Let's connect professionally</p>
+            </div>
+          </div>
+
+          <div style="margin-top: var(--spacing-2xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--border-color);">
+            <h4 style="margin-bottom: var(--spacing-md);">Response Time</h4>
+            <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+              <div style="width: 12px; height: 12px; background-color: #34c759; border-radius: 50%;"></div>
+              <span style="font-size: 14px; color: var(--text-secondary);">Available for opportunities</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+          <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            <span>Thank you! Your message has been sent successfully. I'll get back to you soon!</span>
+          </div>
+
+          <form id="contactForm">
+            <div class="form-group two-col">
+              <div class="form-group">
+                <label class="form-label">Full Name *</label>
+                <input type="text" class="form-input" name="name" placeholder="John Doe" required>
+                <span class="error-message">Please enter your name</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address *</label>
+                <input type="email" class="form-input" name="email" placeholder="john@example.com" required>
+                <span class="error-message">Please enter a valid email</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Phone (Optional)</label>
+              <input type="tel" class="form-input" name="phone" placeholder="+95 9 123 456 789">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Subject *</label>
+              <input type="text" class="form-input" name="subject" placeholder="What is this about?" required>
+              <span class="error-message">Please enter a subject</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Type of Inquiry *</label>
+              <select class="form-select" name="inquiry-type" required>
+                <option value="">Select an option</option>
+                <option value="job">Job Opportunity</option>
+                <option value="collaboration">Collaboration</option>
+                <option value="freelance">Freelance Project</option>
+                <option value="mentor">Mentoring</option>
+                <option value="feedback">Feedback</option>
+                <option value="other">Other</option>
+              </select>
+              <span class="error-message">Please select an inquiry type</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Message *</label>
+              <textarea class="form-textarea" name="message" placeholder="Tell me more about your inquiry..." required></textarea>
+              <span class="error-message">Please enter your message</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">How did you hear about me?</label>
+              <div class="checkbox-group">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="referral" name="source" value="referral">
+                  <label for="referral">Through a referral</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="linkedin" name="source" value="linkedin">
+                  <label for="linkedin">LinkedIn</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="github" name="source" value="github">
+                  <label for="github">GitHub</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="other-source" name="source" value="other">
+                  <label for="other-source">Other</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Preferred Contact Method</label>
+              <div class="availability-grid">
+                <div class="availability-card">
+                  <input type="radio" id="email-pref" name="contact-method" value="email" checked>
+                  <label for="email-pref">
+                    <i class="fas fa-envelope"></i><br>Email
+                  </label>
+                </div>
+                <div class="availability-card">
+                  <input type="radio" id="phone-pref" name="contact-method" value="phone">
+                  <label for="phone-pref">
+                    <i class="fas fa-phone"></i><br>Phone
+                  </label>
+                </div>
+                <div class="availability-card">
+                  <input type="radio" id="linkedin-pref" name="contact-method" value="linkedin">
+                  <label for="linkedin-pref">
+                    <i class="fab fa-linkedin"></i><br>LinkedIn
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="privacy" name="privacy" required>
+                <label for="privacy">I agree to the privacy policy and terms of service *</label>
+              </div>
+              <span class="error-message">Please agree to continue</span>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>Frequently Asked Questions</h2>
+        <p>Quick answers to common questions</p>
+      </div>
+
+      <div style="max-width: 700px; margin: 0 auto;">
+        <div class="faq-item active">
+          <p class="faq-question">
+            <span>What types of opportunities are you looking for?</span>
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </p>
+          <div class="faq-answer">
+            I'm interested in roles that combine technology with social impact. This includes full-stack development positions, 
+            AI/ML opportunities, and projects that create positive community change. I'm also open to freelance collaborations and mentoring opportunities.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">
+            <span>What is your typical response time?</span>
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </p>
+          <div class="faq-answer">
+            I aim to respond to all inquiries within 24 hours during weekdays. If you have urgent matters, please mention it in your subject line. 
+            You can also reach out via LinkedIn for faster communication if needed.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">
+            <span>Are you available for freelance projects?</span>
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </p>
+          <div class="faq-answer">
+            Yes! I take on selective freelance projects that align with my interests and schedule. I specialize in web development, 
+            API integration, and small-scale ML implementations. Please provide project details for a quote.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">
+            <span>Can you mentor or give advice?</span>
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </p>
+          <div class="faq-answer">
+            Absolutely! I'm passionate about helping others grow in tech and personal development. I offer informal mentoring sessions 
+            on programming, career guidance, and community work. Let's discuss what you need help with.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">
+            <span>Do you work with international clients?</span>
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </p>
+          <div class="faq-answer">
+            Yes, I'm experienced in working with international teams and clients. I'm available for remote collaborations and am 
+            flexible with time zone differences. My primary timezone is GMT+6:30 (Myanmar Standard Time).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">
+            <span>How can I stay updated on your work?</span>
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </p>
+          <div class="faq-answer">
+            Follow me on LinkedIn and GitHub for regular updates on projects, insights, and opportunities. I occasionally share about 
+            my journey, learnings, and open positions. Feel free to connect and drop a message anytime!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section-light">
+    <div class="container text-center">
+      <h2 style="margin-bottom: var(--spacing-lg);">Ready to Start a Conversation?</h2>
+      <p style="font-size: 16px; margin-bottom: var(--spacing-lg); color: var(--text-secondary);">
+        No matter the reason for reaching out, I'm excited to hear from you. Send a message or connect on social media!
+      </p>
+      <a href="#contactForm" class="btn btn-primary btn-lg">
+        <i class="fas fa-arrow-down"></i> Go to Contact Form
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="about.html">Certificates</a></li>
+          <li><a href="#">Blog (Coming Soon)</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:nyan.linn.htet@example.com">Email</a></li>
+          <li><a href="tel:+95912345678">Phone</a></li>
+          <li><a href="#">Location: Myanmar</a></li>
+          <li><a href="#">Available for: Work</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <p>&copy; 2024 Nyan Linn Htet. All rights reserved.</p>
+      </div>
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Initialize EmailJS
+    (function() {
+      emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
+    })();
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.addEventListener('click', function() {
+        // Close other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== this) {
+            otherItem.classList.remove('active');
+          }
+        });
+        // Toggle current item
+        this.classList.toggle('active');
+      });
+    });
+
+    // Contact Form Validation and Submission
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+
+    function validateEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function validateForm() {
+      let isValid = true;
+      const form = contactForm;
+      const inputs = form.querySelectorAll('.form-input, .form-textarea, .form-select');
+
+      inputs.forEach(input => {
+        const errorMsg = input.parentElement.querySelector('.error-message');
+        let inputValid = true;
+
+        if (input.hasAttribute('required') && input.value.trim() === '') {
+          inputValid = false;
+        } else if (input.name === 'email' && input.value.trim() !== '') {
+          inputValid = validateEmail(input.value);
+        }
+
+        if (!inputValid) {
+          input.classList.add('error');
+          if (errorMsg) {
+            errorMsg.classList.add('show');
+          }
+          isValid = false;
+        } else {
+          input.classList.remove('error');
+          if (errorMsg) {
+            errorMsg.classList.remove('show');
+          }
+        }
+      });
+
+      // Validate privacy checkbox
+      const privacyCheckbox = form.querySelector('input[name="privacy"]');
+      if (!privacyCheckbox.checked) {
+        privacyCheckbox.closest('.checkbox-item').querySelector('.error-message').classList.add('show');
+        isValid = false;
+      } else {
+        privacyCheckbox.closest('.checkbox-item').querySelector('.error-message').classList.remove('show');
+      }
+
+      return isValid;
+    }
+
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (validateForm()) {
+        // Get form data
+        const formData = new FormData(contactForm);
+        
+        // Prepare email parameters
+        const templateParams = {
+          from_name: formData.get('name'),
+          from_email: formData.get('email'),
+          phone: formData.get('phone') || 'Not provided',
+          subject: formData.get('subject'),
+          inquiry_type: formData.get('inquiry-type'),
+          message: formData.get('message'),
+          contact_method: formData.get('contact-method'),
+          to_email: 'nyan.linn.htet@example.com' // Your email address
+        };
+
+        // Send email using EmailJS
+        emailjs.send('SERVICE_ID', 'TEMPLATE_ID', templateParams)
+          .then(function(response) {
+            console.log('Email sent successfully!', response.status, response.text);
+            
+            // Show success message
+            successMessage.classList.add('show');
+            successMessage.innerHTML = `
+              <i class="fas fa-check-circle"></i>
+              <span>Thank you! Your message has been sent successfully. I'll get back to you soon!</span>
+            `;
+
+            // Reset form
+            contactForm.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+              successMessage.classList.remove('show');
+            }, 5000);
+
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+          }, function(error) {
+            console.log('Failed to send email:', error);
+            successMessage.classList.add('show');
+            successMessage.innerHTML = `
+              <i class="fas fa-exclamation-circle"></i>
+              <span>There was an issue sending your message. Please try again or contact me directly.</span>
+            `;
+            setTimeout(() => {
+              successMessage.classList.remove('show');
+            }, 5000);
+          });
+      }
+    });
+
+    // Real-time validation
+    const inputs = contactForm.querySelectorAll('.form-input, .form-textarea, .form-select');
+    inputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        const errorMsg = this.parentElement.querySelector('.error-message');
+        let isValid = true;
+
+        if (this.hasAttribute('required') && this.value.trim() === '') {
+          isValid = false;
+        } else if (this.name === 'email' && this.value.trim() !== '') {
+          isValid = validateEmail(this.value);
+        }
+
+        if (!isValid) {
+          this.classList.add('error');
+          if (errorMsg) {
+            errorMsg.classList.add('show');
+          }
+        } else {
+          this.classList.remove('error');
+          if (errorMsg) {
+            errorMsg.classList.remove('show');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

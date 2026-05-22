@@ -1,16 +1,251 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nyan Linn Htet | Full-Stack Developer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nyan Linn Htet - Portfolio</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-terminal"></i>
+        Nyan Linn Htet
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="pages/education.html">Education</a></li>
+        <li><a href="pages/experience.html">Experience</a></li>
+        <li><a href="pages/projects.html">Projects</a></li>
+        <li><a href="pages/about.html">About Me</a></li>
+        <li><a href="pages/contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Nyan Linn Htet</h1>
+          <p>
+            An enthusiastic individual who loves working together with diverse people to create impactful contributions for the community and himself. Currently volunteering as a Programme Development Officer at ASEAN Youth Organization – Myanmar and serving as a Project Creator at For The Future – Myanmar, coordinating projects that support youth and community residents in social development, skills sectors, mental well-being, and civic engagement.
+          </p>
+          <p>
+            Pursuing a Bachelor of Computing, aiming to transition into the AI and Machine Learning sector while developing a business-focused model. Actively looking for roles to learn through real-world experience and contribute to the tech industry.
+          </p>
+          <div class="hero-buttons">
+            <a href="pages/about.html" class="btn btn-primary btn-lg">
+              <i class="fas fa-user"></i> Learn More
+            </a>
+            <a href="pages/contact.html" class="btn btn-secondary btn-lg">
+              <i class="fas fa-envelope"></i> Get In Touch
+            </a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="/assets/images/NYAN LINN HTET.png" alt="Nyan Linn Htet">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision & Mission Section -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>Vision & Mission</h2>
+        <p>Shaping the future through technology and community impact</p>
+      </div>
+
+      <div class="vision-mission">
+        <div class="vision-mission-content">
+          <h3>My Vision</h3>
+          <p>
+            To become a transformative leader in AI and Machine Learning, leveraging technology to solve real-world problems and create lasting impact in communities across Southeast Asia.
+          </p>
+          <h3 style="margin-top: var(--spacing-xl);">My Mission</h3>
+          <p>
+            To develop innovative technological solutions that empower youth, strengthen community resilience, and bridge the gap between education and industry needs while maintaining ethical and sustainable practices.
+          </p>
+        </div>
+        <div class="vision-mission-icons">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M2 12h20M6.5 5.5L3 9m0 6l3.5 3.5m14-14l-3.5 3.5m0 6l3.5 3.5"/>
+          </svg>
+          <p style="color: var(--text-secondary); font-size: 14px; text-align: center;">Impact Through Innovation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preview Sections -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="section-title">
+        <h2>Explore My Journey</h2>
+        <p>Discover my education, experience, projects, and more</p>
+      </div>
+
+      <div class="grid-2">
+        <!-- Education Card -->
+        <div class="card">
+          <div class="card-image">
+            <img src="https://via.placeholder.com/600x400/e8f0ff/0071e3?text=Education" alt="Education">
+          </div>
+          <h3 class="card-title">Education</h3>
+          <p class="card-description">
+            Explore my academic journey, qualifications, and courses that shaped my professional growth.
+          </p>
+          <div class="card-footer">
+            <a href="pages/education.html" class="btn btn-primary">
+              <span>Explore</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Experience Card -->
+        <div class="card">
+          <div class="card-image">
+            <img src="https://via.placeholder.com/600x400/ffe8e8/ff3b30?text=Experience" alt="Experience">
+          </div>
+          <h3 class="card-title">Work Experience</h3>
+          <p class="card-description">
+            View my professional work experience, volunteer roles, and the skills I've developed along the way.
+          </p>
+          <div class="card-footer">
+            <a href="pages/experience.html" class="btn btn-primary">
+              <span>Explore</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Projects Card -->
+        <div class="card">
+          <div class="card-image">
+            <img src="https://via.placeholder.com/600x400/e8ffe8/34c759?text=Projects" alt="Projects">
+          </div>
+          <h3 class="card-title">Projects</h3>
+          <p class="card-description">
+            Discover the innovative projects I've created, developed, and contributed to with detailed documentation.
+          </p>
+          <div class="card-footer">
+            <a href="pages/projects.html" class="btn btn-primary">
+              <span>Explore</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- About Me Card -->
+        <div class="card">
+          <div class="card-image">
+            <img src="https://via.placeholder.com/600x400/fff8e8/ff9500?text=About+Me" alt="About Me">
+          </div>
+          <h3 class="card-title">About Me</h3>
+          <p class="card-description">
+            Dive deep into my story, values, certificates, albums, and personal insights through an interactive roadmap.
+          </p>
+          <div class="card-footer">
+            <a href="pages/about.html" class="btn btn-primary">
+              <span>Explore</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section-gray">
+    <div class="container text-center">
+      <h2 style="margin-bottom: var(--spacing-lg);">Let's Work Together</h2>
+      <p style="font-size: 16px; margin-bottom: var(--spacing-lg); max-width: 600px; margin-left: auto; margin-right: auto;">
+        I'm always interested in hearing about new opportunities and collaborations. Feel free to reach out!
+      </p>
+      <a href="pages/contact.html" class="btn btn-primary btn-lg">
+        <i class="fas fa-envelope"></i> Contact Me
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/about.html">About Me</a></li>
+          <li><a href="pages/projects.html">Projects</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="pages/education.html">Education</a></li>
+          <li><a href="pages/experience.html">Experience</a></li>
+          <li><a href="pages/about.html">Certificates</a></li>
+          <li><a href="#">Blog (Coming Soon)</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:your.email@example.com">Email</a></li>
+          <li><a href="tel:+95123456789">Phone</a></li>
+          <li><a href="#">Location: Myanmar</a></li>
+          <li><a href="#">Available for: Work</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <p>&copy; 2024 Nyan Linn Htet. All rights reserved.</p>
+      </div>
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
 </html>

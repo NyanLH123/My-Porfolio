@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience - Nyan Linn Htet</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Additional Experience Page Styles */
+    .experience-toggle {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: center;
+      margin-bottom: var(--spacing-2xl);
+      flex-wrap: wrap;
+    }
+
+    .toggle-btn {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border: 2px solid var(--border-color);
+      background-color: var(--primary-bg);
+      color: var(--text-secondary);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all var(--transition-fast);
+    }
+
+    .toggle-btn.active {
+      background-color: var(--accent-color);
+      color: white;
+      border-color: var(--accent-color);
+    }
+
+    .toggle-btn:hover:not(.active) {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .experience-item {
+      background-color: var(--primary-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
+      transition: all var(--transition-normal);
+      display: none;
+    }
+
+    .experience-item[data-experience] {
+      animation: fadeIn 0.3s ease;
+    }
+
+    .experience-item:hover {
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: var(--spacing-md);
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .experience-title {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .experience-title h3 {
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-primary);
+    }
+
+    .company-name {
+      color: var(--accent-color);
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .experience-duration {
+      color: var(--text-light);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .experience-badge {
+      background-color: var(--secondary-bg);
+      color: var(--text-primary);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .experience-description {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .experience-highlights {
+      list-style: none;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .experience-highlights li {
+      color: var(--text-secondary);
+      padding-left: var(--spacing-lg);
+      position: relative;
+      margin-bottom: var(--spacing-sm);
+      line-height: 1.6;
+    }
+
+    .experience-highlights li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    .skills-used {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .skill-tag {
+      background-color: var(--secondary-bg);
+      color: var(--text-primary);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .resume-section {
+      background: linear-gradient(135deg, rgba(0, 113, 227, 0.05) 0%, rgba(0, 113, 227, 0.02) 100%);
+      border: 2px dashed var(--accent-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-2xl);
+      text-align: center;
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .resume-section h3 {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .resume-section p {
+      margin-bottom: var(--spacing-lg);
+      color: var(--text-secondary);
+    }
+
+    .resume-buttons {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .experience-header {
+        flex-direction: column;
+      }
+
+      .resume-buttons {
+        flex-direction: column;
+      }
+
+      .resume-buttons .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-terminal"></i>
+        Nyan Linn Htet
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html" class="active">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="section section-gray" style="padding-top: var(--spacing-3xl); padding-bottom: var(--spacing-3xl);">
+    <div class="container">
+      <h1 style="margin-bottom: var(--spacing-md);">
+        <i class="fas fa-briefcase" style="color: var(--accent-color);"></i> My Experience
+      </h1>
+      <p style="font-size: 16px; color: var(--text-secondary); max-width: 700px;">
+        A comprehensive overview of my professional journey, including work experience, volunteer roles, and the impact I've made.
+      </p>
+    </div>
+  </section>
+
+  <!-- Resume Download Section -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="resume-section">
+        <h3>Download My Resume</h3>
+        <p>Get a comprehensive overview of my qualifications, experience, and skills in a single document.</p>
+        <div class="resume-buttons">
+          <a href="../downloads/resume.pdf" download class="btn btn-primary btn-lg">
+            <i class="fas fa-download"></i> Download PDF Resume
+          </a>
+          <a href="#" class="btn btn-secondary btn-lg">
+            <i class="fas fa-file-word"></i> Download DOCX Version
+          </a>
+        </div>
+      </div>
+
+      <!-- Experience Toggle -->
+      <div style="text-align: center; margin-bottom: var(--spacing-2xl);">
+        <h2 style="margin-bottom: var(--spacing-lg);">My Professional Journey</h2>
+        <div class="experience-toggle">
+          <button class="toggle-btn active" data-toggle="work">
+            <i class="fas fa-briefcase"></i> Work Experience
+          </button>
+          <button class="toggle-btn" data-toggle="volunteer">
+            <i class="fas fa-heart"></i> Volunteer Experience
+          </button>
+        </div>
+      </div>
+
+      <!-- Work Experience -->
+      <div data-experience="work" style="display: block;">
+        <!-- Job 1 -->
+        <div class="experience-item" data-experience="work">
+          <div class="experience-header">
+            <div class="experience-title">
+              <div class="company-name">Tech Company XYZ</div>
+              <h3>Junior Web Developer</h3>
+              <div class="experience-duration">
+                <i class="fas fa-calendar-alt"></i> 2023 - Present (1+ year)
+              </div>
+            </div>
+            <div class="experience-badge">Full-time</div>
+          </div>
+
+          <p class="experience-description">
+            Developed and maintained web applications using React and Node.js. Collaborated with cross-functional teams to deliver 
+            features and improvements that enhanced user experience and increased system performance by 30%.
+          </p>
+
+          <ul class="experience-highlights">
+            <li>Built responsive web interfaces using React and Bootstrap</li>
+            <li>Implemented RESTful APIs and optimized database queries</li>
+            <li>Collaborated with designers and product managers on feature development</li>
+            <li>Reduced page load time by 40% through code optimization</li>
+            <li>Mentored junior developers and conducted code reviews</li>
+          </ul>
+
+          <div class="skills-used">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Git</span>
+          </div>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="experience-item" data-experience="work">
+          <div class="experience-header">
+            <div class="experience-title">
+              <div class="company-name">Digital Solutions Agency</div>
+              <h3>Frontend Developer Intern</h3>
+              <div class="experience-duration">
+                <i class="fas fa-calendar-alt"></i> 2022 - 2023 (6 months)
+              </div>
+            </div>
+            <div class="experience-badge">Internship</div>
+          </div>
+
+          <p class="experience-description">
+            Supported the frontend development team in building dynamic websites and web applications. Gained hands-on experience 
+            with modern web technologies and best practices in responsive design and user experience.
+          </p>
+
+          <ul class="experience-highlights">
+            <li>Developed responsive websites using HTML, CSS, and JavaScript</li>
+            <li>Implemented UI components based on design mockups</li>
+            <li>Fixed bugs and performed testing on web applications</li>
+            <li>Participated in daily stand-ups and sprint planning meetings</li>
+          </ul>
+
+          <div class="skills-used">
+            <span class="skill-tag">HTML/CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">jQuery</span>
+            <span class="skill-tag">Bootstrap</span>
+            <span class="skill-tag">Figma</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Volunteer Experience -->
+      <div data-experience="volunteer" style="display: none;">
+        <!-- Volunteer 1 -->
+        <div class="experience-item" data-experience="volunteer">
+          <div class="experience-header">
+            <div class="experience-title">
+              <div class="company-name">ASEAN Youth Organization – Myanmar</div>
+              <h3>Programme Development Officer</h3>
+              <div class="experience-duration">
+                <i class="fas fa-calendar-alt"></i> 2022 - Present (2+ years)
+              </div>
+            </div>
+            <div class="experience-badge">Volunteer</div>
+          </div>
+
+          <p class="experience-description">
+            As a Programme Development Officer, I coordinate and develop youth-focused initiatives and programs. I work to 
+            support youth development, civic engagement, and skills training across various communities in Myanmar.
+          </p>
+
+          <ul class="experience-highlights">
+            <li>Designed and implemented youth development programs</li>
+            <li>Coordinated with community partners and stakeholders</li>
+            <li>Managed program budgets and resources efficiently</li>
+            <li>Mentored 50+ youth participants in leadership and skills development</li>
+            <li>Documented program outcomes and created impact reports</li>
+            <li>Led workshops on civic engagement and social responsibility</li>
+          </ul>
+
+          <div class="skills-used">
+            <span class="skill-tag">Program Management</span>
+            <span class="skill-tag">Leadership</span>
+            <span class="skill-tag">Community Engagement</span>
+            <span class="skill-tag">Budget Management</span>
+            <span class="skill-tag">Training & Mentoring</span>
+          </div>
+        </div>
+
+        <!-- Volunteer 2 -->
+        <div class="experience-item" data-experience="volunteer">
+          <div class="experience-header">
+            <div class="experience-title">
+              <div class="company-name">For The Future – Myanmar</div>
+              <h3>Project Creator</h3>
+              <div class="experience-duration">
+                <i class="fas fa-calendar-alt"></i> 2021 - Present (3+ years)
+              </div>
+            </div>
+            <div class="experience-badge">Volunteer</div>
+          </div>
+
+          <p class="experience-description">
+            At For The Future, I create and execute projects focused on social development, mental well-being, and skills training. 
+            I coordinate with volunteers and community partners to ensure project success and sustainable impact.
+          </p>
+
+          <ul class="experience-highlights">
+            <li>Initiated and managed 10+ social development projects</li>
+            <li>Organized mental health awareness campaigns and workshops</li>
+            <li>Coordinated 100+ volunteers on various community initiatives</li>
+            <li>Developed training curriculum for vocational skills programs</li>
+            <li>Established partnerships with local schools and organizations</li>
+            <li>Tracked and reported on project KPIs and impact metrics</li>
+          </ul>
+
+          <div class="skills-used">
+            <span class="skill-tag">Project Management</span>
+            <span class="skill-tag">Volunteer Coordination</span>
+            <span class="skill-tag">Curriculum Development</span>
+            <span class="skill-tag">Stakeholder Management</span>
+            <span class="skill-tag">Impact Assessment</span>
+          </div>
+        </div>
+
+        <!-- Volunteer 3 -->
+        <div class="experience-item" data-experience="volunteer">
+          <div class="experience-header">
+            <div class="experience-title">
+              <div class="company-name">Community Tech Initiative</div>
+              <h3>Tech Skills Trainer</h3>
+              <div class="experience-duration">
+                <i class="fas fa-calendar-alt"></i> 2020 - Present (4+ years)
+              </div>
+            </div>
+            <div class="experience-badge">Volunteer</div>
+          </div>
+
+          <p class="experience-description">
+            Teaching technology and programming skills to underserved communities, helping them access better opportunities 
+            in the digital economy. Focus on practical skills and real-world applications.
+          </p>
+
+          <ul class="experience-highlights">
+            <li>Conducted coding workshops for 200+ community members</li>
+            <li>Created beginner-friendly programming curriculum</li>
+            <li>Provided mentorship and career guidance to students</li>
+            <li>Secured resources and funding for tech training programs</li>
+            <li>Established tech learning centers in remote areas</li>
+          </ul>
+
+          <div class="skills-used">
+            <span class="skill-tag">Teaching</span>
+            <span class="skill-tag">Web Development</span>
+            <span class="skill-tag">Curriculum Design</span>
+            <span class="skill-tag">Fundraising</span>
+            <span class="skill-tag">Community Building</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Competencies -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>Core Competencies</h2>
+        <p>Key skills and expertise developed through work and volunteer experience</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="margin-bottom: var(--spacing-md); color: var(--accent-color);">
+            <i class="fas fa-code"></i> Technical Skills
+          </h4>
+          <ul style="list-style: none; color: var(--text-secondary);">
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> Full Stack Web Development</li>
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> React & JavaScript Mastery</li>
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> Backend Development (Node.js)</li>
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> Database Management</li>
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> Cloud Services (AWS, GCP)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4 style="margin-bottom: var(--spacing-md); color: var(--accent-color);">
+            <i class="fas fa-users"></i> Soft Skills
+          </h4>
+          <ul style="list-style: none; color: var(--text-secondary);">
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> Team Leadership</li>
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> Project Management</li>
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> Communication & Presentation</li>
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> Problem Solving</li>
+            <li style="padding: var(--spacing-sm) 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: var(--spacing-sm);"></i> Adaptability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="section section-light">
+    <div class="container text-center">
+      <h2 style="margin-bottom: var(--spacing-lg);">Let's Connect</h2>
+      <p style="font-size: 16px; margin-bottom: var(--spacing-lg); color: var(--text-secondary);">
+        Interested in collaborating or learning more about my experience? Let's get in touch!
+      </p>
+      <a href="contact.html" class="btn btn-primary btn-lg">
+        <i class="fas fa-envelope"></i> Get In Touch
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="about.html">Certificates</a></li>
+          <li><a href="#">Blog (Coming Soon)</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:your.email@example.com">Email</a></li>
+          <li><a href="tel:+95123456789">Phone</a></li>
+          <li><a href="#">Location: Myanmar</a></li>
+          <li><a href="#">Available for: Work</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <p>&copy; 2024 Nyan Linn Htet. All rights reserved.</p>
+      </div>
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Experience Toggle Functionality
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    
+    toggleButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const target = this.getAttribute('data-toggle');
+        const items = document.querySelectorAll('[data-experience]');
+
+        toggleButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+
+        items.forEach(item => {
+          if (item.getAttribute('data-experience') === target) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Set work experience as default visible
+    document.addEventListener('DOMContentLoaded', function() {
+      const workItems = document.querySelectorAll('[data-experience="work"]');
+      workItems.forEach(item => {
+        item.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>
